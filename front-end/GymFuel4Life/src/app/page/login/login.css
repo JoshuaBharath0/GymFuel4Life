@@ -1,0 +1,94 @@
+.auth-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/assets/background_login_page.jpg") center/cover no-repeat;
+  font-family: "Inter", sans-serif;
+}
+
+.login-card {
+  background: rgba(30, 33, 38, 0.9); /* Matches your image dark tone */
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+#g_id_signin > div {
+  width: 100% !important;
+}
+
+#g_id_signin iframe {
+  width: 100% !important;
+}
+
+.logo-img {
+  max-width: 180px;
+}
+
+/* Custom Input Styling */
+.custom-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid #444 !important;
+  color: white !important;
+  padding: 12px 15px;
+}
+
+.custom-input::placeholder {
+  color: #888;
+}
+
+.custom-input:focus {
+  border-color: #ff5e14 !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 94, 20, 0.25) !important;
+}
+
+/* The Orange Button */
+.btn-orange {
+  background-color: #ff5e14;
+  border: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-orange:hover {
+  background-color: #e04d0c;
+  color: white;
+}
+
+.small-link:hover {
+  color: #ff5e14 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 1.5rem;
+    margin: 10px;
+  }
+}
+
+/* divider "the OR "*/
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #6c757d; /* Grey color */
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #444; /* Dark line to match your theme */
+}
+
+.divider:not(:empty)::before {
+  margin-right: 0.5em;
+}
+
+.divider:not(:empty)::after {
+  margin-left: 0.5em;
+}

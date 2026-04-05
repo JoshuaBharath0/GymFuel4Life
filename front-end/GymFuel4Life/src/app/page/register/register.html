@@ -1,0 +1,148 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="logo-section">
+      <img
+        src="/assets/gymfule4life-removebg-preview.png"
+        alt="GYMFUEL 4LIFE"
+        class="profile-logo"
+      />
+    </div>
+
+    <h2>COMPLETE YOUR PROFILE</h2>
+    <p class="subtitle">Just a few more details to finalize your account.</p>
+
+    <div class="form-section">
+      <h3>1. Personal Details</h3>
+
+      <div class="row">
+        <div class="input-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            [(ngModel)]="registerRequest.name"
+            name="name"
+            placeholder="First Name"
+            [class.is-invalid]="fieldErrors.name"
+          />
+          @if (fieldErrors.name) {
+            <span class="error-text">
+              {{ fieldErrors.name }}
+            </span>
+          }
+        </div>
+
+        <div class="input-group">
+          <label>Gender</label>
+          <select
+            [(ngModel)]="registerRequest.gender"
+            name="gender"
+            [class.is-invalid]="fieldErrors.gender"
+            class="editable-field"
+          >
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+
+          @if (fieldErrors.gender) {
+            <span class="error-text">
+              {{ fieldErrors.gender }}
+            </span>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Surname</label>
+          <input
+            type="text"
+            [(ngModel)]="registerRequest.surname"
+            name="surname"
+            placeholder="Surname"
+            [class.is-invalid]="fieldErrors.surname"
+          />
+          @if (fieldErrors.surname) {
+            <span class="error-text">
+              {{ fieldErrors.surname }}
+            </span>
+          }
+        </div>
+
+        <div class="input-group">
+          <label>Date of Birth (DOB)</label>
+          <input
+            type="date"
+            [(ngModel)]="registerRequest.DOB"
+            name="dob"
+            class="editable-field"
+            max="2006-12-31"
+            min="1900-01-01"
+            [class.is-invalid]="fieldErrors.DOB"
+          />
+          @if (fieldErrors.DOB) {
+            <span class="error-text">
+              {{ fieldErrors.DOB }}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>2. Account Credentials</h3>
+      <div class="input-group">
+        <label>Email Adress</label>
+        <input
+          type="text"
+          [(ngModel)]="registerRequest.emailAddress"
+          name="email"
+          placeholder="Email"
+          [class.is-invalid]="fieldErrors.emailAddress"
+        />
+        @if (fieldErrors.emailAddress) {
+          <span class="error-text">
+            {{ fieldErrors.emailAddress }}
+          </span>
+        }
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Password</label>
+          <input
+            type="password"
+            [(ngModel)]="registerRequest.password"
+            name="password"
+            placeholder="Enter your password"
+            [class.is-invalid]="fieldErrors.password"
+          />
+          @if (fieldErrors.password) {
+            <span class="error-text">
+              {{ fieldErrors.password }}
+            </span>
+          }
+        </div>
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            [(ngModel)]="registerRequest.confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm"
+            [class.is-invalid]="fieldErrors.confirmPassword"
+          />
+          @if (fieldErrors.confirmPassword) {
+            <span class="error-text">
+              {{ fieldErrors.confirmPassword }}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" (click)="onRegisterSubmit()">
+      Finish Registration
+    </button>
+  </div>
+</div>

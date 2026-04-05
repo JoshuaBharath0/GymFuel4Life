@@ -1,0 +1,86 @@
+<div class="auth-wrapper d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-5 col-xl-4">
+        <div class="login-card shadow-lg">
+          <div class="text-center mb-4">
+            <img
+              src="assets/gymfule4life-removebg-preview.png"
+              alt="GymeFuel"
+              class="img-fluid logo-img"
+            />
+          </div>
+
+          <h1 class="h4 text-white text-centre mb-4">
+            Sign In To Your Account
+          </h1>
+
+          <form (ngSubmit)="onLoginSubmit()">
+            <div class="mb-3">
+              <input
+                type="email"
+                name="email"
+                class="form-control custom-input"
+                placeholder="Email"
+                [(ngModel)]="loginData.username"
+                required
+              />
+            </div>
+            <div class="mb-4 position-relative">
+              <input
+                type="password"
+                name="password"
+                class="form-control custom-input"
+                placeholder="Password"
+                [(ngModel)]="loginData.password"
+                required
+              />
+              <i class="bi bi-eye-slash password-icon"></i>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-orange w-100 fw-bold py-2 mb-3"
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              class="btn btn-orange w-100 fw-bold py-2 mb-3"
+              routerLink="/Register"
+            >
+              Register
+            </button>
+          </form>
+
+          <div class="divider text-center my-3">
+            <span>OR</span>
+          </div>
+
+          <!-- Hidden Google SDK div -->
+          <div id="g_id_signin" style="display: none"></div>
+
+          <!-- Custom styled Google button -->
+          <button
+            type="button"
+            (click)="signInWithGoogle()"
+            class="btn btn-light w-100 fw-bold py-2 mb-3"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+              width="20"
+              alt="Google"
+              class="me-2"
+            />
+            Sign In with Google
+          </button>
+
+          <div class="text-center mt-4">
+            <a href="#" class="text-secondary text-decoration-none small-link">
+              Forgot password?
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
