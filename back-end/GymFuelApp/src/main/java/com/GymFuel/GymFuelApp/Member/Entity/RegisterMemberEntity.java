@@ -28,7 +28,7 @@ public class RegisterMemberEntity {
     private String gender;
     @Column(name = "date_of_birth")
     private LocalDate DOB;
-    @Column(name = "email_address")
+    @Column(name = "email_address",unique=true,nullable = false)
     private String emailAddress;
     @Column(name = "username")
     private String username;
@@ -42,7 +42,6 @@ public class RegisterMemberEntity {
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.DOB = LocalDate.parse(dto.getDOB());
         this.emailAddress = dto.getEmailAddress();
-        this.username = dto.getUsername();
         this.password = dto.getPassword();
     }
 

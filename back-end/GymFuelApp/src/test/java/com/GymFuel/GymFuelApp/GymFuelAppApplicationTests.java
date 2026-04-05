@@ -8,6 +8,8 @@ class GymFuelAppApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+
 	}
 
 }

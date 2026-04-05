@@ -19,6 +19,7 @@ public class Config {
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(role->role
+                        .requestMatchers("/member/GoogleLogin", "/member/findUser").permitAll()
                         .requestMatchers("/member/**").permitAll()
                         .anyRequest().authenticated());
         return http.build();

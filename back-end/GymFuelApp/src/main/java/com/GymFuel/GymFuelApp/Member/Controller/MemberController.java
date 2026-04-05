@@ -1,7 +1,9 @@
 package com.GymFuel.GymFuelApp.Member.Controller;
 
+import com.GymFuel.GymFuelApp.Member.DTO.GoogleTokenDTO;
 import com.GymFuel.GymFuelApp.Member.DTO.LoginMemberDTO;
 import com.GymFuel.GymFuelApp.Member.DTO.RegisterUserDTO;
+import com.GymFuel.GymFuelApp.Member.Entity.RegisterMemberEntity;
 import com.GymFuel.GymFuelApp.Member.Serivce.MemberImp;
 import com.GymFuel.GymFuelApp.Member.Serivce.MemberService;
 import jakarta.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200" , allowCredentials = "true")
 @RestController
 @RequestMapping("/member")
 public class MemberController {
@@ -19,8 +22,9 @@ public class MemberController {
     }
 
     @PostMapping("/RegisterUser")
-    public void registerUser(@RequestBody @Valid RegisterUserDTO registerUserDTO) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid RegisterUserDTO registerUserDTO) {
             memberService.registerNewUser(registerUserDTO);
+           return   ResponseEntity.ok("User is Registered successfully ");
 
     }
 
@@ -29,4 +33,12 @@ public class MemberController {
         return memberService.loginNewUser(LoginMemberDTO);
 
     }
+    @PostMapping("/GoogleLogin")
+    public ResponseEntity<?>googleLogin(@RequestBody GoogleTokenDTO googleTokenDTO){
+        return memberService.processGoogleLogin(googleTokenDTO.getToken());
+    }
+ @GetMapping("/retrieveUser")
+    public ResponseEntity<?> retrieveUser(@RequestParam String email){
+        return memberService.findMemberByEmail(email);
+ }
 }

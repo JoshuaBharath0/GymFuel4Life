@@ -42,4 +42,15 @@ public class MemberRepository {
             return null;
         }
     }
+    public RegisterMemberEntity findMemberByEmail(String emailAddress) {
+        try {
+            return entityManager.createQuery(
+                            "SELECT s FROM RegisterMemberEntity s WHERE s.emailAddress = :email",
+                            RegisterMemberEntity.class)
+                    .setParameter("email", emailAddress)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Return null if the email isn't in our database yet
+        }
+    }
 }

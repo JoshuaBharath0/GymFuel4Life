@@ -1,0 +1,93 @@
+.auth-container {
+  /* Corrected background path */
+  background: url("/assets/background_login_page.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* Fix for the breaking/oversized logo */
+.logo-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-logo {
+  max-width: 180px; /* Constrains the logo width to fit the card */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.auth-card {
+  background: rgba(26, 26, 26, 0.95); /* Matches the dark gym aesthetic */
+  padding: 30px;
+  border-radius: 15px;
+  width: 95%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.form-section {
+  border: 1px solid #444; /* Section borders from mockup */
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+input,
+select {
+  background: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box; /* Prevents width overflow */
+}
+
+.submit-btn {
+  background: #ff5722; /* High-contrast orange */
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+input[type="date"].editable-field {
+  color-scheme: dark; /* makes the calendar icon match dark theme */
+  cursor: pointer;
+}
+
+input[type="date"].editable-field::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* turns the calendar icon white */
+  cursor: pointer;
+}
+.error-text {
+  color: #ff4d4d !important; /* A bright, modern red */
+  font-size: 12px;
+  margin-top: 5px;
+  display: block; /* Ensures it sits on its own line under the input */
+  font-weight: 500;
+}
