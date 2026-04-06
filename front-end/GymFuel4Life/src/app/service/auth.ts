@@ -3,22 +3,22 @@ import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
 import { Observable } from 'rxjs';
 import { RegisterRequest } from '../models/register-request';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
-  private readonly api_url = 'http://localhost:8080/member';
+  private readonly api_url = environment.apiUrl + '/member';
   constructor(private http: HttpClient) {}
 
-  login(loginData: LoginRequest): Observable<String> {
+  login(loginData: LoginRequest): Observable<string> {
     return this.http.post(`${this.api_url}/LoginUser`, loginData, {
       responseType: 'text',
     });
   }
 
   register(registerRequest: RegisterRequest): Observable<any> {
-    alert('test');
     return this.http.post<any>(`${this.api_url}/RegisterUser`, registerRequest);
   }
 
@@ -28,7 +28,15 @@ export class Auth {
 
   retrieveUser(email: string): Observable<RegisterRequest> {
     return this.http.get<RegisterRequest>(
-      `http://localhost:8080/member/retrieveUser?email=${email}`,
+      `${this.api_url}/retrieveUser?email=${email}`,
+    );
+  }
+  completeGoogleProfile(registerRequest: RegisterRequest): Observable<any> {
+    console.log('Full request:', JSON.stringify(registerRequest));
+
+    return this.http.put<any>(
+      `${this.api_url}/completeProfile`,
+      registerRequest,
     );
   }
 }

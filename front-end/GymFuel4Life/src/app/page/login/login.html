@@ -22,7 +22,7 @@
                 name="email"
                 class="form-control custom-input"
                 placeholder="Email"
-                [(ngModel)]="loginData.username"
+                [(ngModel)]="loginData.email"
                 required
               />
             </div>
@@ -44,6 +44,7 @@
               Sign In
             </button>
             <button
+              (click)="registerUser()"
               type="button"
               class="btn btn-orange w-100 fw-bold py-2 mb-3"
               routerLink="/Register"

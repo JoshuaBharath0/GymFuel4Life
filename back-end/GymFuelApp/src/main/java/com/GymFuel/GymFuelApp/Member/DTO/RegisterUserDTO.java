@@ -14,7 +14,7 @@ public class RegisterUserDTO {
     @NotBlank(message = "Gender cannot be empty")
     private String gender;
     @NotBlank(message = "DOB cannot be empty")
-    private String DOB;
+    private String dob;
     @Email(message = "Please provide a real email format")
     @NotBlank(message = "must be valid or email address already exist")
     private String emailAddress;
@@ -32,7 +32,7 @@ public class RegisterUserDTO {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", gender='" + gender + '\'' +
-                ", DOB='" + DOB + '\'' +
+                ", dob='" + dob + '\'' +
                 ", height=" + emailAddress +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
