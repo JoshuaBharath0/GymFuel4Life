@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200" , allowCredentials = "true")
+import java.util.Collections;
+import java.util.Map;
+
+
 @RestController
 @RequestMapping("/member")
 public class MemberController {
@@ -20,12 +23,17 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService=memberService;
     }
+    @PutMapping("/completeProfile")
+    public ResponseEntity<?> completeProfile(@RequestBody @Valid RegisterUserDTO registerUserDTO) {
+        System.out.println(registerUserDTO.toString());
+
+        return memberService.completeGoogleUserProfile(registerUserDTO);
+    }
 
     @PostMapping("/RegisterUser")
     public ResponseEntity<?> registerUser(@RequestBody @Valid RegisterUserDTO registerUserDTO) {
-            memberService.registerNewUser(registerUserDTO);
-           return   ResponseEntity.ok("User is Registered successfully ");
-
+        memberService.registerNewUser(registerUserDTO);
+        return ResponseEntity.ok(Map.of("message", "User is Registered successfully"));
     }
 
     @PostMapping("/LoginUser")

@@ -1,5 +1,6 @@
 package com.GymFuel.GymFuelApp.Member.Serivce;
 
+import com.GymFuel.GymFuelApp.Configuration.JwtService;
 import com.GymFuel.GymFuelApp.Member.DAO.MemberRepository;
 import com.GymFuel.GymFuelApp.Member.DTO.AuthResponseDTO;
 import com.GymFuel.GymFuelApp.Member.DTO.LoginMemberDTO;
@@ -17,12 +18,16 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collections;
+import java.util.Map;
 
 @Service
 public class MemberImp implements MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
 
     // Reuse verifier — building it is expensive
     private final GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier
@@ -44,7 +49,7 @@ public class MemberImp implements MemberService {
             throw new IllegalArgumentException("Passwords do not match!");
         }
 
-        LocalDate DOB = LocalDate.parse(registerUserDTO.getDOB());
+        LocalDate DOB = LocalDate.parse(registerUserDTO.getDob());
         int age = Period.between(DOB, LocalDate.now()).getYears();
 
 
@@ -60,7 +65,7 @@ public class MemberImp implements MemberService {
         if (checkNullValues(
                 registerUserDTO.getName(),
                 registerUserDTO.getSurname(),
-                registerUserDTO.getDOB(),
+                registerUserDTO.getDob(),
                 registerUserDTO.getPassword()
         )) {
             throw new IllegalArgumentException("Required fields cannot be null");
@@ -73,14 +78,50 @@ public class MemberImp implements MemberService {
 
     @Override
     public String loginNewUser(LoginMemberDTO loginMemberDTO) {
-        RegisterMemberEntity member = memberRepository.findMemberByUsername(loginMemberDTO.getUsername());
+        RegisterMemberEntity member = memberRepository.findMemberByEmail(loginMemberDTO.getEmail());
         if (member == null) {
             throw new IllegalArgumentException("Invalid Username or Password");
         }
         if (!bCryptPasswordEncoder.matches(loginMemberDTO.getPassword(), member.getPassword())) {
             throw new IllegalArgumentException("Invalid Username or Password");
         }
-        return "Login Successful! Welcome back, " + member.getUsername();
+        return  jwtService.generateToken(member.getEmailAddress());
+    }
+
+    @Override
+    public ResponseEntity<?> findMemberByEmail(String email) {
+        RegisterMemberEntity member = memberRepository.findMemberByEmail(email);
+        if (member == null) {
+            return ResponseEntity.status(404).body("User not found");
+        }
+        return ResponseEntity.ok(member);
+    }
+
+    @Override
+    public ResponseEntity<?> completeGoogleUserProfile(RegisterUserDTO registerUserDTO) {
+        try {
+            RegisterMemberEntity existingMember = memberRepository.findMemberByEmail(registerUserDTO.getEmailAddress());
+
+            if (existingMember == null) {
+                // Returning JSON error instead of string
+                return ResponseEntity.status(404).body(Map.of("error", "User not found"));
+            }
+
+            // Update fields
+            existingMember.setName(registerUserDTO.getName());
+            existingMember.setSurname(registerUserDTO.getSurname());
+            existingMember.setGender(registerUserDTO.getGender());
+            existingMember.setDob(LocalDate.parse(registerUserDTO.getDob()));
+            existingMember.setPassword(bCryptPasswordEncoder.encode(registerUserDTO.getPassword()));
+
+            memberRepository.updateMember(existingMember);
+
+            // Returning JSON success object
+            return ResponseEntity.ok(Map.of("message", "Profile completed successfully"));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
     }
 
     @Override
@@ -105,13 +146,13 @@ public class MemberImp implements MemberService {
             RegisterMemberEntity existingMember = memberRepository.findMemberByEmail(email);
 
             if (existingMember != null) {
-                if(existingMember.getDOB()!=null && existingMember.getEmailAddress() !=null){
-                    String appToken = "GENERATED_JWT_HERE"; // TODO: replace with real JWT logic
-                    boolean isComplete = (existingMember.getGender() != null && existingMember.getDOB() != null);
+                if(existingMember.getDob()!=null && existingMember.getEmailAddress() !=null){
+                    String appToken = jwtService.generateToken(email); // TODO: replace with real JWT logic
+                    boolean isComplete = (existingMember.getGender() != null && existingMember.getDob() != null);
                     return ResponseEntity.ok(new AuthResponseDTO(appToken, isComplete,existingMember.getEmailAddress()));
                 }else{
 
-                    String appToken = "GENERATED_JWT_HERE"; // TODO: replace with real JWT logic
+                    String appToken = jwtService.generateToken(email); // TODO: replace with real JWT logic
                     return ResponseEntity.ok(new AuthResponseDTO(appToken, false,email));
                 }
             } else {
@@ -122,7 +163,7 @@ public class MemberImp implements MemberService {
                 newMember.setPassword(null);
                 memberRepository.registerMeber(newMember);
 
-                String appToken = "GENERATED_JWT_HERE"; // TODO: replace with real JWT logic
+                String appToken = jwtService.generateToken(email); // TODO: replace with real JWT logic
                 return ResponseEntity.ok(new AuthResponseDTO(appToken, false,email));
             }
 
@@ -131,15 +172,6 @@ public class MemberImp implements MemberService {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Server Error: " + e.getMessage());
         }
-    }
-
-    @Override
-    public ResponseEntity<?> findMemberByEmail(String email) {
-        RegisterMemberEntity member = memberRepository.findMemberByEmail(email);
-        if (member == null) {
-            return ResponseEntity.status(404).body("User not found");
-        }
-        return ResponseEntity.ok(member);
     }
 
     public boolean checkNullValues(Object... fieldValues) {

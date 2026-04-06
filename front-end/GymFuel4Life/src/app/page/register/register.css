@@ -1,7 +1,6 @@
 .auth-container {
   /* Corrected background path */
-  background: url("/assets/background_login_page.jpg") no-repeat center center
-    fixed;
+  background: url("/assets/background_login_page.jpg") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -90,4 +89,54 @@ input[type="date"].editable-field::-webkit-calendar-picker-indicator {
   margin-top: 5px;
   display: block; /* Ensures it sits on its own line under the input */
   font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .auth-card {
+    padding: 20px 15px;
+  }
+
+  .form-section {
+    padding: 12px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .subtitle {
+    text-align: center;
+  }
+
+  .profile-logo {
+    max-width: 120px;
+  }
+
+  input,
+  select {
+    font-size: 16px; /* Prevents iOS from zooming in on input focus */
+  }
+
+  .submit-btn {
+    padding: 14px;
+    font-size: 14px;
+  }
+}
+
+input[type="date"] {
+  color: #333;
+}
+
+input[type="date"]:not([value]),
+input[type="date"][value=""] {
+  color: #999;
 }

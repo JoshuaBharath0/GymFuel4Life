@@ -73,16 +73,16 @@
           <label>Date of Birth (DOB)</label>
           <input
             type="date"
-            [(ngModel)]="registerRequest.DOB"
+            [(ngModel)]="registerRequest.dob"
             name="dob"
             class="editable-field"
             max="2006-12-31"
             min="1900-01-01"
-            [class.is-invalid]="fieldErrors.DOB"
+            [class.is-invalid]="fieldErrors.dob"
           />
-          @if (fieldErrors.DOB) {
+          @if (fieldErrors.dob) {
             <span class="error-text">
-              {{ fieldErrors.DOB }}
+              {{ fieldErrors.dob }}
             </span>
           }
         </div>
@@ -110,39 +110,64 @@
       <div class="row">
         <div class="input-group">
           <label>Password</label>
-          <input
-            type="password"
-            [(ngModel)]="registerRequest.password"
-            name="password"
-            placeholder="Enter your password"
-            [class.is-invalid]="fieldErrors.password"
-          />
-          @if (fieldErrors.password) {
-            <span class="error-text">
-              {{ fieldErrors.password }}
+          <div style="position: relative">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="registerRequest.password"
+              name="password"
+              placeholder="Enter your password"
+              [class.is-invalid]="fieldErrors.password"
+            />
+            <span
+              (click)="showPassword = !showPassword"
+              style="
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+              "
+            >
+              {{ showPassword ? "🙈" : "👁️" }}
             </span>
+          </div>
+          @if (fieldErrors.password) {
+            <span class="error-text">{{ fieldErrors.password }}</span>
           }
         </div>
+
         <div class="input-group">
           <label>Confirm Password</label>
-          <input
-            type="password"
-            [(ngModel)]="registerRequest.confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm"
-            [class.is-invalid]="fieldErrors.confirmPassword"
-          />
-          @if (fieldErrors.confirmPassword) {
-            <span class="error-text">
-              {{ fieldErrors.confirmPassword }}
+          <div style="position: relative">
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              [(ngModel)]="registerRequest.confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm"
+              [class.is-invalid]="fieldErrors.confirmPassword"
+            />
+            <span
+              (click)="showConfirmPassword = !showConfirmPassword"
+              style="
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+              "
+            >
+              {{ showConfirmPassword ? "🙈" : "👁️" }}
             </span>
+          </div>
+          @if (fieldErrors.confirmPassword) {
+            <span class="error-text">{{ fieldErrors.confirmPassword }}</span>
           }
         </div>
       </div>
-    </div>
 
-    <button class="submit-btn" (click)="onRegisterSubmit()">
-      Finish Registration
-    </button>
+      <button class="submit-btn" (click)="onRegisterSubmit()">
+        Finish Registration
+      </button>
+    </div>
   </div>
 </div>

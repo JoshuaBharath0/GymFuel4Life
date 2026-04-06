@@ -32,16 +32,16 @@ public class MemberRepository {
         return count>0;
     }
 
-    public RegisterMemberEntity findMemberByUsername(String username) {
+/*    public RegisterMemberEntity findMemberByUsername(String email) {
         try {
-            RegisterMemberEntity member = entityManager.createQuery("Select S from RegisterMemberEntity S where S.username=:username", RegisterMemberEntity.class)
-                    .setParameter("username", username)
+            RegisterMemberEntity member = entityManager.createQuery("Select S from RegisterMemberEntity S where S.email=:email", RegisterMemberEntity.class)
+                    .setParameter("email", email)
                     .getSingleResult();
             return member;
         }catch(NoResultException e){
             return null;
         }
-    }
+    }*/
     public RegisterMemberEntity findMemberByEmail(String emailAddress) {
         try {
             return entityManager.createQuery(
@@ -52,5 +52,10 @@ public class MemberRepository {
         } catch (NoResultException e) {
             return null; // Return null if the email isn't in our database yet
         }
+    }
+
+    @Transactional
+    public void updateMember(RegisterMemberEntity registerMemberEntity) {
+        entityManager.merge(registerMemberEntity);
     }
 }

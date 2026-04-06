@@ -10,4 +10,5 @@ public interface MemberService {
     String loginNewUser(LoginMemberDTO loginMemberDTO);
     ResponseEntity<?> processGoogleLogin(String token);
     ResponseEntity<?> findMemberByEmail(String email);
+    ResponseEntity<?> completeGoogleUserProfile(RegisterUserDTO registerUserDTO);
 }
