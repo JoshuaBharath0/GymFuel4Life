@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+@if (isLoading) {
+  <div class="spinner">Loading...</div>
+} @else if (dashboardData) {
+  @if (!dashboardData.gymSetupComplete) {
+    <app-dashboard-welcome></app-dashboard-welcome>
+  } @else {
+    <app-dashboard-main></app-dashboard-main>
+  }
+}

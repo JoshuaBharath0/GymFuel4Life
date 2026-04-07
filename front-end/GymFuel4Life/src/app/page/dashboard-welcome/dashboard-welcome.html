@@ -1,0 +1,93 @@
+@if (!isLoading && dashboardData) {
+  <div class="dashboard-wrapper container-fluid min-vh-100 py-4">
+    <header class="text-white mb-5">
+      <h1 class="h3 fw-light">
+        Hi
+        <span class="name-highlight text-orange">{{
+          dashboardData.firstName
+        }}</span
+        >! Choose your path to
+        <strong class="text-uppercase fw-bold">CRUSH</strong> it today!
+      </h1>
+    </header>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-10">
+        <div
+          class="card portal-card gym-card bg-dark text-white border-0 shadow-lg"
+        >
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-box me-3">
+                <img
+                  src="assets/images/workout_img.png"
+                  alt="Gym"
+                  class="portal-img"
+                />
+              </div>
+              <div>
+                <p class="text-uppercase small mb-0 opacity-75">Gym Portal</p>
+                <h2 class="h4 card-title text-orange mb-0">PATH 1: GYMING</h2>
+              </div>
+            </div>
+
+            <div class="setup-content text-center py-3">
+              <p class="fs-5 mb-4">
+                Tell us a bit about your goals, equipment, and level, and we'll
+                create your perfect plan!
+              </p>
+              <button
+                (click)="goToGymSetup()"
+                class="btn btn-gym-glow w-100 fw-bold py-3"
+              >
+                START WORKOUT NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-10">
+        <div
+          class="card portal-card diet-card bg-dark text-white border-0 shadow-lg"
+        >
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="icon-box me-3">
+                <img
+                  src="assets/images/diet_img.png"
+                  alt="Diet"
+                  class="portal-img"
+                />
+              </div>
+              <div>
+                <h2 class="h4 card-title text-cyan mb-0 text-uppercase">
+                  Path 2: Diet Plan
+                </h2>
+              </div>
+            </div>
+
+            <div class="setup-content text-center py-3">
+              <p class="fs-5 mb-4">
+                Fill in your details and goals to see your personalized macro
+                split!
+              </p>
+              <button
+                (click)="goToDietSetup()"
+                class="btn btn-diet-glow w-100 fw-bold py-3"
+              >
+                START DIET PLAN NOW
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div
+    class="d-flex justify-content-center align-items-center min-vh-100 bg-black"
+  >
+    <div class="spinner-border text-orange" role="status"></div>
+  </div>
+}

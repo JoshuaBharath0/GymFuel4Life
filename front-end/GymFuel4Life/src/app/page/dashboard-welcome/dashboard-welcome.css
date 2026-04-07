@@ -1,0 +1,43 @@
+.bg-black {
+  background-color: #000;
+}
+.text-orange {
+  color: #ff4d00;
+}
+.text-cyan {
+  color: #00e5ff;
+}
+
+.portal-card {
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+/* Red Glow for Gym */
+.gym-card {
+  border: 1px solid rgba(255, 77, 0, 0.3) !important;
+  box-shadow: 0 0 20px rgba(255, 77, 0, 0.1);
+}
+
+.btn-gym-glow {
+  background: #ff4d00;
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 77, 0, 0.5);
+}
+
+/* Blue Glow for Diet */
+.diet-card {
+  border: 1px solid rgba(0, 229, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.btn-diet-glow {
+  background: #00e5ff;
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.portal-img {
+  width: 60px;
+  height: auto;
+}

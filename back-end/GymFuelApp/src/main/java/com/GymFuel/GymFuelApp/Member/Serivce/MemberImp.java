@@ -103,7 +103,6 @@ public class MemberImp implements MemberService {
             RegisterMemberEntity existingMember = memberRepository.findMemberByEmail(registerUserDTO.getEmailAddress());
 
             if (existingMember == null) {
-                // Returning JSON error instead of string
                 return ResponseEntity.status(404).body(Map.of("error", "User not found"));
             }
 
@@ -116,8 +115,15 @@ public class MemberImp implements MemberService {
 
             memberRepository.updateMember(existingMember);
 
-            // Returning JSON success object
-            return ResponseEntity.ok(Map.of("message", "Profile completed successfully"));
+            // --- THE FIX: Generate a token for the now-complete user ---
+            String appToken = jwtService.generateToken(existingMember.getEmailAddress());
+
+            // Return the token so Angular can log them in immediately
+            return ResponseEntity.ok(Map.of(
+                    "message", "Profile completed successfully",
+                    "token", appToken,
+                    "email", existingMember.getEmailAddress()
+            ));
 
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
@@ -190,5 +196,11 @@ public class MemberImp implements MemberService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean checkUserExists(String email) {
+        RegisterMemberEntity member = memberRepository.findMemberByEmail(email);
+        return member != null; // Returns true if user is found, false if deleted
     }
 }

@@ -1,0 +1,54 @@
+.dashboard-wrapper {
+  background-color: #000000;
+  font-family: "Inter", sans-serif;
+}
+
+.text-orange {
+  color: #ff4500;
+}
+.text-cyan {
+  color: #00bfff;
+}
+
+.portal-card {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1a1a1a, #000000);
+}
+
+.gym-card {
+  border: 1px solid rgba(255, 69, 0, 0.3) !important;
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.15);
+}
+
+.diet-card {
+  border: 1px solid rgba(0, 191, 255, 0.3) !important;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
+}
+
+.portal-img {
+  height: 70px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
+}
+
+.btn-gym-glow {
+  background: linear-gradient(to right, #cc3700, #ff4500);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.btn-diet-glow {
+  background: linear-gradient(to right, #008cc2, #00bfff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.btn-gym-glow:hover,
+.btn-diet-glow:hover {
+  transform: scale(1.02);
+  filter: brightness(1.2);
+}
