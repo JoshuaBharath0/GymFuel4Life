@@ -4,6 +4,7 @@ import { LoginRequest } from '../models/login-request';
 import { Observable } from 'rxjs';
 import { RegisterRequest } from '../models/register-request';
 import { environment } from '../../environments/environment';
+import { DashboardRequest } from '../models/dashboard-request';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +39,15 @@ export class Auth {
       `${this.api_url}/completeProfile`,
       registerRequest,
     );
+  }
+
+  verifyToken(token: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.api_url}/verify`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  dashboard(): Observable<DashboardRequest> {
+    return this.http.get<DashboardRequest>(`${this.api_url}/dashboard`);
   }
 }

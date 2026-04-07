@@ -1,5 +1,6 @@
 package com.GymFuel.GymFuelApp.Member.Controller;
 
+import com.GymFuel.GymFuelApp.Configuration.JwtService;
 import com.GymFuel.GymFuelApp.Member.DTO.GoogleTokenDTO;
 import com.GymFuel.GymFuelApp.Member.DTO.LoginMemberDTO;
 import com.GymFuel.GymFuelApp.Member.DTO.RegisterUserDTO;
@@ -18,11 +19,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
+
     private MemberService memberService;
+    private JwtService jwtService;
+
     @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService=memberService;
+    public MemberController(MemberService memberService, JwtService jwtService) {
+        this.memberService = memberService;
+        this.jwtService = jwtService;
     }
+
     @PutMapping("/completeProfile")
     public ResponseEntity<?> completeProfile(@RequestBody @Valid RegisterUserDTO registerUserDTO) {
         System.out.println(registerUserDTO.toString());
@@ -41,12 +47,41 @@ public class MemberController {
         return memberService.loginNewUser(LoginMemberDTO);
 
     }
+
     @PostMapping("/GoogleLogin")
-    public ResponseEntity<?>googleLogin(@RequestBody GoogleTokenDTO googleTokenDTO){
+    public ResponseEntity<?> googleLogin(@RequestBody GoogleTokenDTO googleTokenDTO) {
         return memberService.processGoogleLogin(googleTokenDTO.getToken());
     }
- @GetMapping("/retrieveUser")
-    public ResponseEntity<?> retrieveUser(@RequestParam String email){
+
+    @GetMapping("/retrieveUser")
+    public ResponseEntity<?> retrieveUser(@RequestParam String email) {
         return memberService.findMemberByEmail(email);
- }
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<?> verifyUser(@RequestHeader("Authorization") String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(401).body(Map.of("valid", false));
+        }
+
+        try {
+            // 1. Get the raw token
+            String token = authHeader.substring(7);
+
+            // 2. Use the injected instance to extract the email
+            String email = jwtService.extractEmail(token);
+
+            // 3. Check database
+            boolean exists = memberService.checkUserExists(email);
+
+            if (exists) {
+                return ResponseEntity.ok(Map.of("valid", true));
+            } else {
+                return ResponseEntity.status(401).body(Map.of("valid", false));
+            }
+        } catch (Exception e) {
+            // If token is expired or malformed, it will throw an exception
+            return ResponseEntity.status(401).body(Map.of("valid", false, "error", "Invalid token"));
+        }
+    }
 }

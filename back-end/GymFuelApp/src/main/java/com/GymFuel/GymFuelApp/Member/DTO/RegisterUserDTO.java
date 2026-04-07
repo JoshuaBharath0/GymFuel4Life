@@ -33,7 +33,7 @@ public class RegisterUserDTO {
                 ", surname='" + surname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", dob='" + dob + '\'' +
-                ", height=" + emailAddress +
+                ", emailAddress=" + emailAddress +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
                 '}';
