@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Auth } from '../../service/auth';
 import { DashboardWelcome } from '../dashboard-welcome/dashboard-welcome';
 import { DashboardMain } from '../dashboard-main/dashboard-main'; // Your future real dashboard
+import { DashboardService } from '../../service/dashboard-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,7 @@ export class Dashboard implements OnInit {
   dashboardData: any = null;
   isLoading = true;
 
-  constructor(private authService: Auth) {}
+  constructor(private authService: DashboardService) {}
 
   ngOnInit(): void {
     // This calls your Java method: getDashboardData(email)

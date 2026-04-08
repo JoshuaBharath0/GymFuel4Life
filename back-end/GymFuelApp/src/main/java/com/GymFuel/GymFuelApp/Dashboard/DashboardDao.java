@@ -14,16 +14,19 @@ public class DashboardDao {
     private EntityManager entityManager;
 
     public Optional<DashboardEntity> findByEmail(String email) {
-        try {
-            // We look through the linked RegisterMemberEntity's emailAddress
-            String jpql = "SELECT s FROM DashboardEntity s JOIN s.user u WHERE u.emailAddress = :email";
-            DashboardEntity state = entityManager.createQuery(jpql, DashboardEntity.class)
-                    .setParameter("email", email)
-                    .getSingleResult();
-            return Optional.of(state);
-        } catch (NoResultException e) {
+        String jpql = "SELECT s FROM DashboardEntity s JOIN s.user u WHERE u.emailAddress = :email";
+
+        // Using getResultList() is much safer than getSingleResult()
+        java.util.List<DashboardEntity> results = entityManager.createQuery(jpql, DashboardEntity.class)
+                .setParameter("email", email)
+                .getResultList();
+
+        if (results.isEmpty()) {
             return Optional.empty();
         }
+
+        // If there are multiple, just return the first one found
+        return Optional.of(results.get(0));
     }
 
     @Transactional

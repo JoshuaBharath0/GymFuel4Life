@@ -48,6 +48,8 @@ export class Auth {
   }
 
   dashboard(): Observable<DashboardRequest> {
-    return this.http.get<DashboardRequest>(`${this.api_url}/dashboard`);
+    return this.http.get<DashboardRequest>(`${this.api_url}/dashboard`, {
+      withCredentials: true,
+    });
   }
 }

@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardRequest } from '../../models/dashboard-request';
 import { Auth } from '../../service/auth';
+import { Dashboard } from '../dashboard/dashboard';
+import { DashboardService } from '../../service/dashboard-service';
 
 @Component({
   selector: 'app-dashboard-welcome',
@@ -14,13 +16,13 @@ export class DashboardWelcome {
   isLoading = true;
 
   constructor(
-    private authService: Auth,
+    private dashboardService: DashboardService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
     // The Welcome page pulls the data again to be "independent"
-    this.authService.dashboard().subscribe({
+    this.dashboardService.dashboard().subscribe({
       next: (res) => {
         this.dashboardData = res;
         this.isLoading = false;
