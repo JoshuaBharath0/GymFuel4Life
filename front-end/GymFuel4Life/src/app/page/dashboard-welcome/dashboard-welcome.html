@@ -1,59 +1,85 @@
-<div class="dashboard-wrapper container-fluid py-4">
-  <div class="row g-1 justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <div class="card portal-card gym-card">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center mb-3">
+<div
+  class="dashboard-wrapper vh-100 overflow-hidden d-flex flex-column bg-black p-2"
+>
+  <div class="row justify-content-center flex-shrink-0 mb-3">
+    <div class="col-12 col-md-10 col-lg-8 pt-4 px-4">
+      <h1 class="display-4 mb-0 fw-900 text-white tracking-tighter">
+        Hi <span class="text-fire">Joshua</span>!
+      </h1>
+      <p class="h4 fw-light text-white-50 opacity-75">
+        Choose your path to <span class="fw-bold text-white">CRUSH</span> it
+        today!
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="row flex-grow-1 justify-content-center g-3 overflow-hidden px-2 pb-2"
+  >
+    <div class="col-12 col-md-10 col-lg-8 d-flex flex-column flex-fill">
+      <div class="card portal-card gym-card h-100 border-0 shadow-lg">
+        <div class="card-body d-flex flex-column p-4">
+          <div class="d-flex align-items-center mb-1">
             <div class="portal-img-wrapper me-3">
-              <img
-                src="assets/workout_img.jpg"
-                alt="Fire Gym"
-                class="portal-img"
-              />
+              <img src="assets/workout_img.jpg" alt="Gym" class="portal-img" />
             </div>
-            <div>
-              <p class="text-uppercase small mb-0 opacity-75 fw-bold">
+            <div class="flex-grow-1">
+              <p
+                class="text-uppercase x-small mb-0 fw-bold text-white-50 tracking-widest"
+              >
                 Gym Portal
               </p>
-              <h2 class="h3 mb-0 fw-bold text-uppercase" style="color: #ff4500">
+              <h2 class="display-5 mb-0 fw-900 text-uppercase text-orange">
                 Path 1: Gyming
               </h2>
             </div>
           </div>
 
-          <p class="fs-6 opacity-90 mb-4">
+          <div class="ghost-line"></div>
+
+          <p class="card-desc mb-4">
             Tell us a bit about your goals, equipment, and level, and we'll
             create your perfect plan!
           </p>
 
-          <button class="btn btn-fire-red w-100">START WORKOUT NOW</button>
+          <button
+            class="btn btn-fire-red w-100 py-3 fw-bold text-uppercase shadow-lg mt-auto"
+          >
+            Start Workout Now
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="col-12 col-md-10 col-lg-8">
-      <div class="card portal-card diet-card text-white">
-        <div class="card-body p-4">
-          <div class="d-flex align-items-center mb-3">
+    <div class="col-12 col-md-10 col-lg-8 d-flex flex-column flex-fill mb-2">
+      <div class="card portal-card diet-card h-100 border-0 shadow-lg">
+        <div class="card-body d-flex flex-column p-4">
+          <div class="d-flex align-items-center mb-1">
             <div class="portal-img-wrapper me-3">
               <img src="assets/diet_img.png" alt="Diet" class="portal-img" />
             </div>
-            <div>
+            <div class="flex-grow-1">
               <p
-                class="text-uppercase small mb-0 opacity-75 fw-bold text-uppercase"
+                class="text-uppercase x-small mb-0 fw-bold text-white-50 tracking-widest"
               >
                 Path 2
               </p>
-              <h2 class="h3 mb-0 fw-bold text-uppercase" style="color: #00d4ff">
+              <h2 class="display-5 mb-0 fw-900 text-uppercase text-cyan">
                 Diet Plan
               </h2>
             </div>
           </div>
-          <p class="fs-6 opacity-90 mb-4">
+
+          <div class="ghost-line"></div>
+
+          <p class="card-desc mb-4">
             Fill in your details and goals to see your personalized macro split!
           </p>
-          <button class="btn btn-cyan-glow w-100 py-3 text-white fw-bold">
-            START DIET PLAN NOW
+
+          <button
+            class="btn btn-cyan-glow w-100 py-3 fw-bold text-uppercase shadow-lg mt-auto"
+          >
+            Start Diet Plan Now
           </button>
         </div>
       </div>
