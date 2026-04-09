@@ -1,116 +1,132 @@
-/* --- Global Dashboard Style --- */
+/* 1. GLOBAL ENGINE */
 .dashboard-wrapper {
-  background: #000000;
-  min-height: 100vh;
-  padding: 20px;
-  color: white;
+  height: 100vh !important;
+  background-color: #000;
+  font-family: "Inter", sans-serif; /* Recommended for a professional look */
 }
 
-/* --- Portal Card Base --- */
+.flex-fill {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. TYPOGRAPHY SCALING */
+.fw-900 {
+  font-weight: 900 !important;
+}
+.tracking-tighter {
+  letter-spacing: -2px;
+}
+.tracking-widest {
+  letter-spacing: 2px;
+  font-size: 0.65rem;
+}
+
+.display-4 {
+  font-size: 3.5rem !important;
+} /* Big "Hi Joshua" */
+.display-5 {
+  font-size: 2.2rem !important;
+  line-height: 1;
+} /* Big Path Titles */
+.text-fire {
+  color: #ff4500;
+}
+.text-orange {
+  color: #ff5e00;
+}
+.text-cyan {
+  color: #00d4ff;
+}
+
+/* 3. THE GHOST LINE (The 2mm Fix) */
+.ghost-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  margin-top: 8px !important; /* Exactly 2mm gap from heading */
+  margin-bottom: 15px !important; /* Space before the description starts */
+  width: 100%;
+}
+
+.card-desc {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+}
+
+/* 4. CARD STYLING */
 .portal-card {
-  position: relative;
-  border-radius: 20px;
-  /* This prevents the gradient from escaping the corners */
+  border-radius: 30px;
   overflow: hidden;
-  margin-bottom: 0.2rem;
-  border: 1px solid transparent;
-  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* --- GYM CARD (The Full Fix) --- */
 .gym-card {
-  /* Linear gradient for edge-to-edge coverage */
-  background: linear-gradient(145deg, rgba(255, 69, 0, 0.4) 0%, #0d0d0d 100%);
-  border: 1px solid rgba(255, 69, 0, 0.6) !important;
-  box-shadow: 0 0 30px rgba(255, 69, 0, 0.1);
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 69, 0, 0.2) 0%,
+    #0d0d0d 100%
+  );
 }
 
-/* Fixes the image breaking/stretching */
+.diet-card {
+  background: radial-gradient(
+    circle at top left,
+    rgba(0, 212, 255, 0.15) 0%,
+    #0d0d0d 100%
+  );
+}
+
 .portal-img-wrapper {
-  width: 100px;
-  height: 100px;
-  flex-shrink: 0; /* Prevents text from squishing the image */
-  border-radius: 12px;
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
   overflow: hidden;
-  background: #000;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .portal-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures fire hand image fits perfectly */
+  object-fit: cover;
 }
 
-/* --- THE FIRE RED BUTTON --- */
+/* 5. BUTTONS */
 .btn-fire-red {
-  background: linear-gradient(180deg, #ff4500 0%, #cc0000 100%);
+  background: linear-gradient(180deg, #ff4500, #b33000);
   border: none;
-  border-radius: 12px;
+  border-radius: 18px;
   color: white;
-  font-weight: 800;
-  text-transform: uppercase;
-  padding: 15px;
-  box-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
-  transition: transform 0.2s ease;
-}
-
-.btn-fire-red:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 30px rgba(255, 69, 0, 0.8);
-}
-
-/* --- DIET CARD FIX --- */
-.diet-card {
-  background: linear-gradient(145deg, rgba(0, 212, 255, 0.25) 0%, #0d0d0d 100%);
-  border: 1px solid rgba(0, 212, 255, 0.5) !important;
 }
 
 .btn-cyan-glow {
-  background: linear-gradient(180deg, #00d4ff 0%, #0088aa 100%);
+  background: linear-gradient(180deg, #00d4ff, #0088aa);
   border: none;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  border-radius: 18px;
+  color: white;
 }
 
-/* Update the description text to black */
-.portal-card p {
-  color: #000000 !important; /* This makes it solid black */
-  font-weight: 600; /* Making it bolder helps visibility when using black on colors */
-}
-
-/* Update the sub-labels (e.g., "GYM PORTAL") to black */
-/* .portal-card .small {
-  color: #000000 !important;
-  opacity: 0.8;
-} */
-
-/* If you want the titles black too
-.portal-card h2 {
-  color: #000000 !important;
-} */
-
-/* --- GYM PORTAL TEXT (High-Visibility Gold) --- */
-.gym-card p,
-.gym-card .small {
-  color: #d88177 !important; /* Bright Gold/Yellow is very 'seeable' on red */
-  font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(97, 8, 7, 0.338);
-}
-
-.gym-card h2 {
-  color: #ff4500 !important; /* Vibrant Orange-Red */
-  text-transform: uppercase;
-}
-
-/* --- DIET PORTAL TEXT (High-Visibility Ice Blue) --- */
-.diet-card p,
-.diet-card .small {
-  color: #a0f0ff !important; /* Soft Electric Blue pops against deep blue */
-  font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-.diet-card h2 {
-  color: #00d4ff !important; /* Bright Cyan */
-  text-transform: uppercase;
+/* 6. RESPONSIVE COMPRESSION (For smaller phones) */
+@media (max-height: 750px) {
+  .display-4 {
+    font-size: 2.8rem !important;
+  }
+  .display-5 {
+    font-size: 1.8rem !important;
+  }
+  .portal-img-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+  .card-body {
+    padding: 1.25rem !important;
+  }
 }
